@@ -50,7 +50,7 @@ while (True):
 
         # reading audio file
         audio = wave.open("output.wav", "rb")
-        l = fs
+        l = audio.getnframes()
 
         # converting audio to list of binary data
         sound = []

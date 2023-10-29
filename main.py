@@ -1,86 +1,85 @@
+# Team HIGURE-RAKSHAS ( Namay, Shashank, Vatsal) : Control Keyboard and Mouse with literally anything that can create musical notes!
+
 from scipy.io.wavfile import write
-import sounddevice as sd
-import wave  # for .wav file format
+import sounddevice as sd  # Provides bindings for the PortAudio library (acquire and output real-time audio streams
+# from your computer's hardware audio interfaces) and a few convenience functions to play and record NumPy arrays containing audio signals
+import wave  # Interface for .wav file format
 import struct  # Interpret bytes as packed binary data
-import pyautogui  # for keyboard input
+import pyautogui  # Controls the mouse and keyboard to automate interactions with other applications
 import math
 import numpy as np
-import pygame  # for UI
-import sys
-import os
+import sys  # Manipulate different parts of python runtime environment
+import os  # Interact with OpSys
+import pygame  # To create a new window
 
-# repositioning of window
 os.environ["SDL_VIDEO_WINDOW_POS"] = "%d,%d" % (0, 0)
 
-# interface
+# Interface
 
-# main window
 pygame.init()
-w = 1270
+w = 1270;
 h = 30
 win = pygame.display.set_mode((w, h))
 win.fill("white")
-
-#Stop button
 pygame.draw.rect(win, color="red", rect=(w - 100, 0, 100, 50))
 font = pygame.font.SysFont("Arial", 20)
 stop_text = font.render("STOP", True, "white")
 win.blit(stop_text, (w - 80, 4))
-
-#Instruction bar
 keymap = font.render("A:ENTER     B:EXIT     C:UP     D:DOWN     E:LEFT     F:RIGHT     G:SPACE", True, "black")
 win.blit(keymap, (250, 4))
-
 pygame.display.flip()
 
 # Quantization --> Conversion of Analog signals to Digital signals, capturing
 # thousands of audio - samples per second.
 
-fs = 48000  # (STANDARD VALUE) Sample rate - Number of samples per second that are taken of a waveform to create a discete digital signal.
+fs = 48000  # (STANDARD VALUE) Sample rate - Number of samples per second that are taken of a waveform to
+# create a discete digital signal.
 seconds = 0.5  # Duration of recording
 
 while (True):
-
     try:
-
-        # recording and saving sound
+        # Recording sound
         r = sd.rec(int(seconds * fs), samplerate=fs, channels=1, dtype=np.int16)
+        print("Recording")
         sd.wait()
+        print("Finished recording")
         write('output.wav', fs, r)
 
-        # reading audio file
         audio = wave.open("output.wav", "rb")
         l = audio.getnframes()
 
-        # converting audio to list of binary data
+        # Converting Audio to Array using struct
         sound = []
         for i in range(l):
-            k = audio.readframes(1)
-            bin_data = struct.unpack("<h", k)
-            sound.append(int(bin_data[0]))
+            wdata = audio.readframes(1)  # Write Data
+            d = struct.unpack("<h", wdata)
+            sound.append(int(d[0]))
 
-        # scaling to 0-1
+        # Scaling to 0 - 1
         m = max(sound)
         if (m != 0):
             for i in range(l):
-                sound[i] = sound[i] / m
+                sound[i] = sound[i] / m  # This gives a value between 0 and 1
 
-        # fourier transform
+        # Using Fast Fourier Transform ( fft )
+
         fourier = np.absolute(np.fft.fft(sound))
 
-        imax = np.argmax(fourier)
+        imax = np.argmax(fourier)  # Returns the indices of the maximum values along an axis
 
         t = 0.3 * fourier[imax]
+
         for i in range(l):
             if (fourier[i] >= t):
                 imax = i
                 break
 
-        # calculating frequency
-        frequency = round(imax * fs / (l * 2))  # channel = 2, Dunno why but this worked
+        # Calculating Frequency :
+
+        frequency = round(imax * fs / (l * 2))  # Channel = 2 ; Dunno why but this worked! ;)
         print(frequency)
 
-        # Stop button and Quit configuration
+        # Stop button and Quit Config
         mouse = pygame.mouse.get_pos()
 
         for event in pygame.event.get():
@@ -90,21 +89,26 @@ while (True):
                 if (w - 100 <= mouse[0] <= w):
                     sys.exit()
 
-        # assigning keys
+        # ------------------------------------------------------------------------------------------------
+
         if frequency >= 120:
 
             index = []
             for i in range(3, 8):
                 index.append(i)
 
-            alpha_index = ["C", "D", "E", "F", "G", "A", "B"]
+            alpha_index = ["C", "D", "E", "F", "G", "A", "B"]  # Notes used for control
 
-            notes = []  # containing 42 entries
+            notes = []  # Containing 35 entries
+
             for i in range(0, 5):
                 for j in range(7):
                     notes.append(alpha_index[j] + str(index[i]))
 
+            # To find the note to perform the required action
+
             freq_C3 = 130.81
+
             freq_note = []
             freq_temp = freq_C3
             freq_note.append(round(freq_C3))
@@ -118,8 +122,7 @@ while (True):
                     freq_temp = freq_ele
                 freq_note.append(round(freq_ele))
 
-            # checking input frequencies
-            delta = []
+            delta = []  # To get to the desired Note
             for i in range(0, 35):
                 delta.append(math.fabs(frequency - freq_note[i]))
 
@@ -129,39 +132,40 @@ while (True):
 
             print(alpha_req)
 
-            # A:ENTER     B:EXIT     C:UP     D:DOWN     E:LEFT     F:RIGHT     G:SPACE
             if alpha_req == "C":
-                pyautogui.press('up')
-                print("Moving a step upwards")
+                pyautogui.press(['up'])
+                print("moving a step upwards")
 
             if alpha_req == "D":
-                pyautogui.press('down')
-                print("Moving a step downwards")
+                pyautogui.press(['down'])
+                print("moving a step downwards")
 
             if alpha_req == "E":
-                pyautogui.press('left')
-                print("Moving a step toward left")
+                pyautogui.press(['left'])
+                print("moving a step toward left")
 
             if alpha_req == "F":
-                pyautogui.press('right')
-                print("Moving a step toward right")
+                pyautogui.press(['right'])
+                print("moving a step toward right")
 
             if alpha_req == "G":
-                pyautogui.press('space')
-                print("Creating a space")
+                pyautogui.press(['space'])
+                print("creating a space")
 
             if alpha_req == "A":
-                pyautogui.press('enter')
-                print("Moving to next line")
+                pyautogui.press(['enter'])
+                print("moving to next line")
 
             if alpha_req == "B":
-                pyautogui.hotkey('alt', 'f4')
-                print("Exiting the window")
+                pyautogui.hotkey(['alt', 'f4'])
+                print("exiting the window")
+        else:
+            print("frequency value out of feasible musical range! ")
 
-        del audio, frequency, r, sound, fourier, l, imax, m, bin_data, k
+        del audio, frequency, r, sound, fourier, l, imax, m, d, wdata
 
     except KeyboardInterrupt:
         break
 
-# ----------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------
 

@@ -13,17 +13,24 @@ import os
 os.environ["SDL_VIDEO_WINDOW_POS"] = "%d,%d" % (0, 0)
 
 # interface
+
+# main window
 pygame.init()
 w = 1270
 h = 30
 win = pygame.display.set_mode((w, h))
 win.fill("white")
+
+#Stop button
 pygame.draw.rect(win, color="red", rect=(w - 100, 0, 100, 50))
 font = pygame.font.SysFont("Arial", 20)
 stop_text = font.render("STOP", True, "white")
 win.blit(stop_text, (w - 80, 4))
+
+#Instruction bar
 keymap = font.render("A:ENTER     B:EXIT     C:UP     D:DOWN     E:LEFT     F:RIGHT     G:SPACE", True, "black")
 win.blit(keymap, (250, 4))
+
 pygame.display.flip()
 
 # Quantization --> Conversion of Analog signals to Digital signals, capturing
@@ -33,6 +40,7 @@ fs = 48000  # (STANDARD VALUE) Sample rate - Number of samples per second that a
 seconds = 0.5  # Duration of recording
 
 while (True):
+
     try:
 
         # recording and saving sound

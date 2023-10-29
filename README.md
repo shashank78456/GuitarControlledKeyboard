@@ -1,8 +1,9 @@
-# GuitarControlledKeyboard
+# Note-fy
 
-Guitar ____ is a program which can be used to play games using a guitar (or use certain keys on the keyboard using guitar) . 
-It makes the game more challenging and triggers your guitar playing abilities.
+Note-fy is a program which can be used to play games using any musical instrument (or use certain keys on the keyboard using musical instruments) . 
+It makes the game more challenging and triggers your music playing skills.
 
+We have used a guitar in our project but any musical instruments which produce notes can work 
 ## Requirements
 
 python3 and its
@@ -22,7 +23,7 @@ libraries and modules:
 
 Make sure you have the requirements installed
 1. use git clone or download the zip file 
-2. execute the ____.py file
+2. execute the main.py file
 3. The notes C,D,E,F,G,A,B on scales 3 to 7 have been assigned keys as follows:
    * C: "UP"
    * D: "DOWN"
@@ -31,7 +32,7 @@ Make sure you have the requirements installed
    * G: "SPACE"
    * A: "ENTER"
    * B: "EXIT"
-4. Play the guitar and enjoy!!!
+4. Play the instrument and enjoy!!!
 
 ## Working
 * The program records audio on regular intervals and stores it on a .wav file.

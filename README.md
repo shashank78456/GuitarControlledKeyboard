@@ -1,6 +1,6 @@
-# Note-fy
+# Symphony
 
-Note-fy is a program which can be used to play games using any musical instrument (or use certain keys on the keyboard using musical instruments) . 
+Symphony is a program which can be used to play games using any musical instrument (or use certain keys on the keyboard using musical instruments) . 
 It makes the game more challenging and triggers your music playing skills.
 
 We have used a guitar in our project but any musical instruments which produce notes can work 

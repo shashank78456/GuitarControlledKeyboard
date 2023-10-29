@@ -1,9 +1,9 @@
 # Symphony
 
-Symphony is a program which can be used to play games using any musical instrument (or use certain keys on the keyboard using musical instruments) . 
-It makes the game more challenging and triggers your music playing skills.
+Symphony is a program which can be used to control your machine using any musical instrument (or use certain keys on the keyboard using musical instruments). 
+It makes your instrument learning experience more creative and fun. 
 
-We have used a guitar in our project but any musical instruments which produce notes can work 
+We have used a guitar in our project but any musical instrument which can produce different notes can be used.  
 ## Requirements
 
 python3 and its
@@ -24,7 +24,7 @@ libraries and modules:
 Make sure you have the requirements installed
 1. use git clone or download the zip file 
 2. execute the main.py file
-3. The notes C,D,E,F,G,A,B on scales 3 to 7 have been assigned keys as follows:
+3. The notes C,D,E,F,G,A,B on Octaves 3 to 7 have been assigned keyboard keys as follows:
    * C: "UP"
    * D: "DOWN"
    * E: "LEFT"
@@ -32,7 +32,7 @@ Make sure you have the requirements installed
    * G: "SPACE"
    * A: "ENTER"
    * B: "EXIT"
-4. Play the instrument and enjoy!!!
+4. Play the instrument and let our program do its wonders for you!!!
 
 ## Working
 * The program records audio on regular intervals and stores it on a .wav file.

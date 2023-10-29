@@ -17,7 +17,7 @@ os.environ["SDL_VIDEO_WINDOW_POS"] = "%d,%d" % (0, 0)
 # Interface
 
 pygame.init()
-w = 1270;
+w = 1270
 h = 30
 win = pygame.display.set_mode((w, h))
 win.fill("white")
@@ -33,18 +33,19 @@ pygame.display.flip()
 # thousands of audio - samples per second.
 
 fs = 48000  # (STANDARD VALUE) Sample rate - Number of samples per second that are taken of a waveform to
-# create a discete digital signal.
+# create a discrete digital signal.
 seconds = 0.5  # Duration of recording
 
 while (True):
     try:
-        # Recording sound
+        # Recording sound and saving audio
         r = sd.rec(int(seconds * fs), samplerate=fs, channels=1, dtype=np.int16)
         print("Recording")
         sd.wait()
         print("Finished recording")
         write('output.wav', fs, r)
 
+        # reading audio file
         audio = wave.open("output.wav", "rb")
         l = audio.getnframes()
 
@@ -65,7 +66,7 @@ while (True):
 
         fourier = np.absolute(np.fft.fft(sound))
 
-        imax = np.argmax(fourier)  # Returns the indices of the maximum values along an axis
+        imax = np.argmax(fourier)
 
         t = 0.3 * fourier[imax]
 

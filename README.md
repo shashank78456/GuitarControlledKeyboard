@@ -21,7 +21,7 @@ libraries and modules:
 
 ## Instructions
 
-Make sure you have the requirements installed
+Make sure you have the requirements installed.
 1. use git clone or download the zip file 
 2. execute the main.py file
 3. The notes C,D,E,F,G,A,B on Octaves 3 to 7 have been assigned keyboard keys as follows:

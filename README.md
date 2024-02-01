@@ -1,7 +1,7 @@
 # Symphony
 
 Symphony is a program which can be used to control your machine using any musical instrument or (literally anything that creates distinct musical notes) (or use certain keys on the keyboard using musical instruments). 
-It makes your instrument learning experience more creative and fun and Gaming Control is really awesome and builds and improves your muscle memory!. 
+It makes your instrument learning experience more creative and fun and Gaming Control is really awesome and builds and improves your muscle memory!
 
 We have used a Guitar in our project but any musical instrument which can produce different notes can be used.
 

@@ -34,7 +34,7 @@ Make sure you have the requirements installed.
    * G: "SPACE"
    * A: "ENTER"
    * B: "EXIT"
-4. Play the instrument and let our program do its wonders for you!!!
+4. Play the instrument and let our program do its wonders for you!!
 
 ## Working
 
